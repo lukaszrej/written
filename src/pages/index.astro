@@ -1,0 +1,64 @@
+---
+import Layout from '~/layouts/PageLayout.astro';
+
+import Hero from '~/components/widgets/Hero.astro';
+import Note from '~/components/ui/Note.astro';
+import BlogList from '~/components/ui/List.astro';
+import Headline from '~/components/ui/Headline.astro';
+
+import { blogListRobots, fetchPosts, blogPostsPerPage } from '~/utils/blog';
+
+const allPosts = await fetchPosts();
+const posts = allPosts.slice(0, blogPostsPerPage || 10);
+
+const metadata = {
+  title: 'Blog',
+  robots: {
+    index: blogListRobots?.index,
+    follow: blogListRobots?.follow,
+  },
+  openGraph: {
+    type: 'blog',
+  },
+};
+---
+
+<Layout metadata={metadata}>
+  <Hero
+    actions={[
+      {
+        variant: 'primary',
+        text: 'My resume',
+        href: 'https://lukaszrej.github.io/resume/',
+        target: '_blank',
+        icon: 'tabler:brand-github',
+      },
+    ]}
+    image={{ src: '~/assets/images/hero-image.png', alt: 'Human Ink Hero Image' }}
+  >
+    <Fragment slot="title">
+      My blog <span class="text-accent dark:text-white">Human Ink</span>
+    </Fragment>
+
+    <Fragment slot="subtitle">
+      <span class="hidden sm:inline">
+        <span class="font-semibold">Lorem ipsum</span> dolor sit amet consectetur adipisicing elit. Inventore ipsam molestiae
+        laudantium eaque, voluptatem est.
+      </span>
+      <span class="block mb-1 sm:hidden font-bold text-blue-600">Human Ink: The Blog.</span>
+      Suitable for Startups, Small Business, SaaS websites, Professional Portfolios, Marketing websites, Landing Pages &
+      Blogs.
+    </Fragment>
+  </Hero>
+
+  <Note title="Philosophy:" description="Simplicity, Best Practices and High Performance" />
+
+  <section class="px-6 sm:px-6 py-12 sm:py-16 lg:py-20 mx-auto max-w-4xl">
+    <Headline subtitle="A statically generated blog example with news, tutorials and more."> The Blog </Headline>
+    <BlogList posts={posts} />
+    <!--
+      <PostTags tags={allCategories} class="mb-2" title="Search by Categories:" isCategory />
+      <PostTags tags={allTags}  title="Search by Tags:" />
+    -->
+  </section>
+</Layout>

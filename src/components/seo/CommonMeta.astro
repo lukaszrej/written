@@ -1,0 +1,10 @@
+---
+import { getAsset } from '~/utils/permalinks';
+const canonicalURL = new URL(Astro.url.pathname, Astro.site);
+---
+
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+<link rel="canonical" href={canonicalURL} />
+<link rel="sitemap" href={getAsset('/sitemap-index.xml')} />
