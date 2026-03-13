@@ -75,8 +75,8 @@ export interface UIConfig {
 
 export const SITE: SiteConfig = {
   name: 'Human Ink',
-  site: 'https://humanink.vercel.app',
-  base: '/',
+  site: 'https://lukaszrej.github.io/',
+  base: '/written',
   trailingSlash: false,
   googleSiteVerificationId: 'orcPxI47GSa-cRvY11tUe6iGg2IO_RPvnA1q95iEM3M',
 };
